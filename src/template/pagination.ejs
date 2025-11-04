@@ -1,0 +1,16 @@
+<!-- pagination.ejs -->
+<nav class="pagination">
+  <% if (totalPages > 1) { %>
+    <ul>
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <% 
+          // Si hay búsqueda, mantenerla en el enlace
+          const query = searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ''; 
+        %>
+        <li class="<%= i === currentPage ? 'active' : '' %>">
+          <a href="/projects/v1.0/list?page=<%= i %><%= query %>"><%= i %></a>
+        </li>
+      <% } %>
+    </ul>
+  <% } %>
+</nav>

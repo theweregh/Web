@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio - Proyectos Integradores</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <%- include('menu') %>
+
+    <main>
+        <section class="carousel">
+            <div class="carousel-track">
+                <% featuredProjects.forEach((p, i) => { %>
+                    <div class="carousel-slide <%= i === 0 ? 'active' : '' %>">
+                        <div class="slide-wrapper">
+                            <a href="/projects/<%= p.id %>">
+                                <div class="slide-content">
+                                    <img src="/assets/<%= p.images[0] %>" alt="<%= p.title %>"
+                                        onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+                                </div>
+                                <div class="carousel-overlay">
+                                    <div class="carousel-caption">
+                                        <h2><%= p.title %></h2>
+                                        <p><%= p.project %></p>
+                                        <span><%= p.course %></span> 
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+            <div class="carousel-dots">
+                <% featuredProjects.forEach((_, i) => { %>
+                    <span class="dot <%= i === 0 ? 'active' : '' %>"></span>
+                <% }) %>
+            </div>
+        </section>
+
+        <section class="latest-comments">
+            <h2>Últimas declaraciones del jurado</h2>
+            <div class="comments-list">
+                <% latestComments.forEach(comment => { %>
+                    <div class="comment-card">
+                        <img src="/assets/<%= comment.image %>" alt="<%= comment.teacher %>"
+                            onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+                        <div class="comment-info">
+                            <h4><%= comment.teacher %></h4>
+                            <p>"<%= comment.text %>"</p>
+                            <small>Proyecto: <%= comment.projectTitle %></small>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+    <script src="/js/home.js"></script>
+</body>
+</html>

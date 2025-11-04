@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle de Proyecto</title>
+  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/project.css">
+</head>
+
+<body>
+  <%- include('menu') %>
+
+  <div>
+    <p><%= project.date %></p>
+    <h1><%= project.title %></h1>
+    <p><%= project.project %></p>
+    <p><%= project.course %></p>
+
+    <h2>Descripción</h2>
+    <p><%- project.description.replace(/\n/g, '<br>') %></p>
+
+
+    <h2>Miembros</h2>
+    <% for (let i = 0; i < project.members.length; i++) { %>
+      <p><%= project.members[i] %></p>
+    <% } %>
+
+    <% if (project.comments && project.comments.length > 0) { %>
+      <h2>Comentarios de Jurados</h2>
+      <div class="comments-carousel" id="comments-carousel">
+        <% project.comments.forEach((c, idx) => { %>
+          <div class="comment-item <%= idx === 0 ? 'active' : '' %>">
+            <img src="/assets/<%= c.image || 'default-user.jpg' %>" alt="<%= c[1] %>" onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+            <h4><%= c.teacher %></h4>
+            <p>"<%= c.text %>"</p>
+          </div>
+        <% }) %>
+
+        <div class="carousel-buttons">
+          <button id="prevComment">&#10094;</button>
+          <button id="nextComment">&#10095;</button>
+        </div>
+      </div>
+    <% } %>
+
+    <h2>Imágenes</h2>
+    <% for (let j = 0; j < project.images.length; j++) { %>
+      <img src="/assets/<%= project.images[j] %>" style="max-width:400px;border-radius:8px;margin:10px;" onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+    <% } %>
+    <a href="/projects/<%= project.id %>/gallery" class="btn-gallery">Ver galería completa</a>
+  </div>
+  
+  <%- include('footer') %>
+  <script src="/js/comments.js"></script>
+</body>
+
+</html>

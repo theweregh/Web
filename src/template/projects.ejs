@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Proyectos</title>
+  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/project.css">
+  <link rel="icon" type="image/png" href="/UN.png">
+</head>
+
+<body>
+    <%- include('menu') %>
+    <h1 class="titulo-lista">Lista de Proyectos</h1>
+    <%- include('search') %>
+    <div>
+    <% for (let i=0; i < projects.length; i++) {%>
+      <a href="/projects/<%= projects[i].id %>" class="project-card">
+      <img src="/assets/<%= projects[i].images[0] %>" onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+      <p>
+        <%= projects[i].date %>
+      </p>
+      <h3>
+        <%= projects[i].title %>
+      </h3>
+      <p>
+        <%= projects[i].project %>
+      </p>
+      <p>
+        <%= projects[i].course %>
+      </p>
+    </a>
+    <% } %>
+    
+      </div>
+      <%- include('pagination', { currentPage, totalPages }) %>
+      <%- include('footer') %>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galería - <%= project.title %></title>
+  <link rel="stylesheet" href="/css/home.css"> <!-- puedes reutilizar el mismo CSS -->
+</head>
+
+<body>
+  <%- include('menu') %>
+
+  <main>
+    <section class="carousel">
+      <div class="carousel-track">
+        <% project.images.forEach((img, i) => { %>
+          <div class="carousel-slide <%= i === 0 ? 'active' : '' %>">
+            <div class="slide-wrapper">
+              <div class="slide-content">
+                <img src="/assets/<%= img %>" alt="Imagen del proyecto"
+                     onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="carousel-dots">
+        <% project.images.forEach((_, i) => { %>
+          <span class="dot <%= i === 0 ? 'active' : '' %>"></span>
+        <% }) %>
+      </div>
+    </section>
+
+    <section class="gallery-info">
+      <h1><%= project.title %></h1>
+      <p><%= project.project %></p>
+      <small><%= project.course %> – <%= project.date %></small>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+  <script src="/js/home.js"></script> <!-- reutiliza el mismo script del carrusel -->
+</body>
+</html>
