@@ -1,0 +1,166 @@
+/* ================================ */
+/* 🌌 Galería GOTY - Fullscreen Carrusel */
+/* ================================ */
+
+/* Contenedor principal */
+main {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #eee;
+}
+
+/* ================================ */
+/* 🎞️ Carrusel Fullscreen */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 90vh; /* Ocupa casi toda la pantalla */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Track de slides */
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease;
+  align-items: center;
+  height: 100%;
+}
+
+/* Cada slide */
+.carousel-slide {
+  flex: 0 0 33.333%; /* 3 slides visibles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+  transform: scale(0.85);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  height: 100%;
+}
+
+.carousel-slide.is-centered {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Wrapper interno */
+.slide-wrapper {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+/* Contenido de cada slide */
+.slide-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Imagen 16:9 forzada y ocupando todo */
+.slide-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.8);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.slide-content img:hover {
+  transform: scale(1.05) rotateY(2deg);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9);
+}
+
+/* ================================ */
+/* • Dots del carrusel */
+.carousel-dots {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  z-index: 10;
+}
+
+.carousel-dots .dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background: #fff;
+  transform: scale(1.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* ================================ */
+/* Información del proyecto (debajo) */
+.gallery-info {
+  padding: 2rem 3vw;
+  text-align: center;
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.gallery-info h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.gallery-info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.gallery-info small {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+/* ================================ */
+/* Responsive */
+@media (max-width: 1024px) {
+  .carousel-slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    height: 70vh;
+  }
+
+  .carousel-slide {
+    flex: 0 0 80%;
+  }
+
+  .gallery-info h1 {
+    font-size: 2.5rem;
+  }
+
+  .gallery-info p {
+    font-size: 1rem;
+  }
+}

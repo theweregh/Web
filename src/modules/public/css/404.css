@@ -1,0 +1,37 @@
+/* ================================ */
+/* 🌌 Página 404 - Imagen centrada animada */
+/* ================================ */
+.error-404-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* centra verticalmente */
+  position: relative;
+  overflow: hidden;
+}
+
+.error-404-container img {
+  width: 60%;
+  max-width: 500px;
+  height: auto;
+  opacity: 0;
+  animation: floatIn 1.5s ease-out forwards, float 4s ease-in-out infinite;
+}
+
+/* Animación de aparición y fade */
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animación flotante */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}

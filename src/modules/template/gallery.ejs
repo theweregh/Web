@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galería - <%= project.title %></title>
-  <link rel="stylesheet" href="/css/home.css"> <!-- puedes reutilizar el mismo CSS -->
+  <title>Galería - <%= project.title %></title><!-- puedes reutilizar el mismo CSS -->
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="/css/gallery.css">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
     <section class="gallery-info">
       <h1><%= project.title %></h1>
       <p><%= project.project %></p>
-      <small><%= project.course %> – <%= project.date %></small>
+      <small><%= project.course %> - <%= project.date %></small>
     </section>
   </main>
 

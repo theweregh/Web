@@ -1,92 +1,118 @@
-/* ====== Estilos globales (modo oscuro) ====== */
+/* ================================ */
+/* 🌌 Lista de Proyectos - Estilo GOTY compacto con 5 por fila */
+/* ================================ */
+
 body {
-    margin: 0;
-    background: #000; 
-    background-size: cover;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+  color: #eee;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
-main {
-    flex: 1;
-}
-
-
-h1, h2, h3 {
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-p {
-  margin: 0.3rem 0;
-  color: #e0e0e0;
-}
-
-/* ====== Contenedor general ====== */
-div {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #111;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
-}
-
-/* ====== Lista de proyectos ====== */
-a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  background-color: #1a1a1a;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-a:hover {
-  background-color: #222;
-  transform: translateY(-2px);
-}
-
-/* ====== Imágenes ====== */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin: 1rem 0;
-  box-shadow: 0 1px 5px rgba(255,255,255,0.1);
-}
-
-/* ====== Secciones ====== */
-section {
-  margin-top: 2rem;
-}
-
-section h2 {
-  border-bottom: 2px solid #333;
-  padding-bottom: 0.3rem;
-  margin-bottom: 0.8rem;
-  color: #fff;
-}
-
-.titulo-lista {
+h1.titulo-lista {
   text-align: center;
+  margin: 2rem 0 1rem 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
-/* === Paginación === */
+/* Contenedor principal: máximo 5 columnas */
+div {
+  max-width: 1600px;
+  margin: 0 auto 3rem auto;
+  padding: 0 2vw;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+/* Tarjetas de proyecto */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(30,30,30,0.85);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1rem;
+  text-decoration: none;
+  color: #eee;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease;
+  min-height: 350px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  background: rgba(40,40,40,0.95);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+.project-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+.project-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  margin-bottom: 0.3rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.project-card p:first-of-type {
+  font-size: 0.8rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Hover overlay sutil */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* Paginación GOTY */
 .pagination {
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem 0 3rem 0;
 }
 
 .pagination ul {
   list-style: none;
-  padding: 0;
   display: inline-flex;
   gap: 0.5rem;
 }
@@ -95,11 +121,11 @@ section h2 {
   display: block;
   padding: 8px 12px;
   background: #fff;
-  border-radius: 6px;
   color: #000;
   text-decoration: none;
+  border-radius: 6px;
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .pagination li a:hover {
@@ -112,163 +138,38 @@ section h2 {
   border: 1px solid #fff;
 }
 
-/* === Footer === */
+/* Footer */
 footer {
-  background-color: #000;
+  background: #000;
   color: #fff;
   text-align: center;
   padding: 1rem;
-  margin-top: 3rem;
   font-size: 0.9rem;
   box-shadow: 0 -2px 6px rgba(255,255,255,0.1);
 }
 
-/* === Estructura del documento === */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* ================================ */
+/* Responsive */
+@media (max-width: 1400px) {
+  div {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+@media (max-width: 1200px) {
+  div {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-main {
-  flex: 1;
+@media (max-width: 900px) {
+  div {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* === Tarjeta de proyecto === */
-.project-card {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  background-color: #1a1a1a;
-  border: 1px solid #333;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  transition: background-color 0.25s ease, transform 0.1s ease;
-}
-
-.project-card:hover {
-  background-color: #222;
-  transform: translateY(-3px);
-}
-
-/* Imagen a la izquierda con tamaño fijo (ajustado) */
-.project-card img {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 5px rgba(255,255,255,0.15);
-}
-
-/* Contenido de texto */
-.project-info {
-  flex: 1;
-}
-
-.project-info h3 {
-  margin: 0.3rem 0;
-  color: #fff;
-}
-
-.project-info p {
-  margin: 0.2rem 0;
-  color: #ddd;
-}
-
-/* === Carrusel de Comentarios === */
-.comments-carousel {
-  position: relative;
-  min-height: 300px;
-  max-width: 700px;
-  margin: 2rem auto;
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(255,255,255,0.15);
-  padding: 2rem 3rem;
-  overflow: hidden;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.comments-carousel:hover {
-  background: #1a1a1a;
-}
-
-.comment-item {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.comment-item.active {
-  display: block;
-  opacity: 1;
-}
-
-.comment-item img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  box-shadow: 0 0 6px rgba(255,255,255,0.2);
-}
-
-.comment-item h4 {
-  margin: 0.5rem 0;
-  color: #fff;
-}
-
-.comment-item p {
-  color: #ddd;
-  font-size: 0.95rem;
-}
-
-/* === Botones del carrusel === */
-.carousel-buttons {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transform: translateY(-50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  padding: 0 1.5rem;
-  box-sizing: border-box;
-}
-
-.comments-carousel:hover .carousel-buttons {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.carousel-buttons button {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  border: none;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.carousel-buttons button:hover {
-  background: rgba(255,255,255,0.4);
-  transform: scale(1.1);
+@media (max-width: 600px) {
+  div {
+    grid-template-columns: 1fr;
+  }
 }

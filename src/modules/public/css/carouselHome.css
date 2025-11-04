@@ -1,0 +1,224 @@
+/* ======================================= */
+/* 🖼️ Carrusel Principal (3 Slides Visibles) */
+/* ======================================= */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 640px;
+    overflow: hidden;
+    user-select: none;
+    margin: 40px 0 200px 0;
+    z-index: 1000;
+    /* fondo opcional si quieres un degradado detrás */
+    background: transparent;
+}
+
+/* Track: flex horizontal que se mueve con transform */
+.carousel-track {
+    display: flex;
+    align-items: center;
+    height: 600px;
+    transition: transform 0.6s ease;
+    will-change: transform;
+    touch-action: pan-y; /* permite scroll vertical en móviles */
+    padding: 0 20px; /* deja espacio a los lados para el margen visual */
+    box-sizing: border-box;
+    cursor: grab;
+}
+
+/* Cada slide ocupa 1/3 del viewport (como en tu diseño) */
+.carousel-slide {
+    min-width: calc(100vw / 3);
+    width: calc(100vw / 3);
+    height: 600px;
+    position: relative;
+    overflow: visible; /* permitir que el zoom no corte */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper mantiene la separación visual entre slides */
+.carousel-slide .slide-wrapper {
+    position: relative;
+    width: calc(100% - 40px); /* compensamos el margin visual interno */
+    height: 100%;
+    z-index: 10;
+    margin: 0 20px; /* tu separación visual */
+    box-sizing: border-box;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.5s ease, box-shadow 0.4s ease;
+}
+
+/* Contenido de la imagen */
+.slide-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: transform 0.6s ease, opacity 0.3s ease, filter 0.4s ease;
+    will-change: transform, opacity;
+}
+
+/* Imagen: cubrir todo el slide */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform-origin: center center;
+}
+
+/* Overlay negro sobre la imagen */
+.slide-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.45s ease;
+    z-index: 5;
+}
+
+/* Slide centrado: quitamos overlay y agrandamos un poco */
+.carousel-slide.is-centered .slide-wrapper {
+    transform: scale(1.03);
+    z-index: 25;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+.carousel-slide.is-centered .slide-content {
+    transform: scale(1.02);
+}
+
+.carousel-slide.is-centered .slide-content::after {
+    opacity: 0; /* quita overlay en el central */
+}
+
+/* Overlay para el texto */
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.85);
+    width: 100%;
+    text-align: center;
+    padding: 15px 10px;
+    border-top: 2px solid #fff;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
+/* Mostrar la caption al hover (para escritorio) */
+.carousel-slide a:hover .carousel-caption,
+.carousel-slide.is-centered a .carousel-caption {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Títulos y texto */
+.carousel-caption h2 {
+    color: #ddd;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow:
+        1px 1px 0px rgba(0, 0, 0, 0.5),
+        -1px -1px 0px rgba(255, 255, 255, 0.1);
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-caption p,
+.carousel-caption span {
+    color: #bbb;
+    font-size: 0.95rem;
+    margin-top: 6px;
+}
+
+/* Dots del carrusel */
+.carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 8px;
+    z-index: 300;
+    pointer-events: auto;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #555;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+.dot.active {
+    background: #ffffff;
+    transform: scale(1.35);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1100px) {
+    .carousel {
+        height: 520px;
+    }
+    .carousel-track {
+        padding: 0 10px;
+    }
+    .carousel-slide, .carousel-slide .slide-wrapper {
+        width: calc(100vw / 3);
+    }
+}
+
+@media (max-width: 800px) {
+    /* En móviles dejamos 1 slide visible (más usable) */
+    .carousel {
+        height: 420px;
+    }
+    .carousel-track {
+        padding: 0;
+    }
+    .carousel-slide {
+        min-width: 100vw;
+        width: 100vw;
+    }
+    .carousel-slide .slide-wrapper {
+        margin: 0;
+        width: 100%;
+    }
+    .carousel-caption { font-size: 0.95rem; }
+}
+
+/* pequeños ajustes visuales para evitar que se seleccione texto mientras arrastras */
+.carousel * {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

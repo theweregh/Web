@@ -1,0 +1,14 @@
+/* ======================================= */
+/* 🚀 Tema Oscuro Principal (BABYMETAL) 🚀 */
+/* ======================================= */
+body {
+    margin: 0;
+    background: #000; 
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Inicio - Proyectos Integradores</title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/body.css">
+    <link rel="stylesheet" href="/css/carouselHome.css">
 </head>
 
 <body>
     <%- include('menu') %>
 
     <main>
+        <!-- ====================================== -->
+        <!-- Carousel Principal -->
+        <!-- ====================================== -->
         <section class="carousel">
             <div class="carousel-track">
                 <% featuredProjects.forEach((p, i) => { %>
@@ -34,32 +39,39 @@
                 <% }) %>
             </div>
 
-            <div class="carousel-dots">
+            <div class="carousel-dots carousel-home-dots">
                 <% featuredProjects.forEach((_, i) => { %>
                     <span class="dot <%= i === 0 ? 'active' : '' %>"></span>
                 <% }) %>
             </div>
         </section>
 
-        <section class="latest-comments">
+        <!-- ====================================== -->
+        <!-- Carousel de Comentarios -->
+        <!-- ====================================== -->
+        <section class="comment-carousel">
             <h2>Últimas declaraciones del jurado</h2>
-            <div class="comments-list">
-                <% latestComments.forEach(comment => { %>
-                    <div class="comment-card">
-                        <img src="/assets/<%= comment.image %>" alt="<%= comment.teacher %>"
-                            onerror="this.onerror=null; this.src='/assets/NOIMAGE.png';">
-                        <div class="comment-info">
-                            <h4><%= comment.teacher %></h4>
-                            <p>"<%= comment.text %>"</p>
-                            <small>Proyecto: <%= comment.projectTitle %></small>
-                        </div>
+            <div class="comment-track">
+                <% latestComments.forEach((comment, i) => { %>
+                    <div class="comment-slide <%= i === 0 ? 'active' : '' %>">
+                        <p>"<%= comment.text %>"</p>
+                        <h4>— <%= comment.teacher %> (<%= comment.projectTitle %>)</h4>
                     </div>
+                <% }) %>
+            </div>
+
+            <div class="comment-dots">
+                <% latestComments.forEach((_, i) => { %>
+                    <span class="dot <%= i === 0 ? 'active' : '' %>"></span>
                 <% }) %>
             </div>
         </section>
     </main>
 
     <%- include('footer') %>
+
+    <!-- Scripts -->
     <script src="/js/home.js"></script>
+    <script src="/js/commentsHome.js"></script>
 </body>
 </html>
