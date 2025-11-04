@@ -1,12 +1,7 @@
 import express, { Application } from 'express'
-import ProductRouter from './product/router/ProductRouter'
-import ProductView from './product/view/ProductView'
 import path from 'node:path'
 import ErrorRouter from './error/router/ErrorRouter'
 import ErrorView from './error/view/ErrorView'
-import ProductModel from './product/model/ProductModel'
-import UserRouter from './user/router/UserRouter'
-import UserView from './user/view/UserView'
 import ProjectRouter from './project/router/ProjectRouter'
 import ProjectModel from './project/model/ProjectModel'
 import ProjectView from './project/view/ProjectView'
@@ -15,8 +10,6 @@ export default class Server {
   private readonly app: Application
 
   constructor(
-    private readonly productRouter: ProductRouter,
-    private readonly userRouter: UserRouter,
     private readonly errorRouter: ErrorRouter,
     private readonly projectRouter: ProjectRouter
   ) {
@@ -34,8 +27,6 @@ export default class Server {
   }
 
   private readonly routes = (): void => {
-    this.app.use('/users', this.userRouter.router)
-    this.app.use('/products', this.productRouter.router)
     this.app.use('/projects', this.projectRouter.router)
     this.app.use('/{*any}', this.errorRouter.router)
   }
@@ -43,7 +34,7 @@ export default class Server {
   private readonly static = (): void => {
     this.app.use(express.static(path.join(__dirname, './public')))
     this.app.use(favicon(path.join(__dirname, './public', 'UN.png')))
-    this.app.use('/assets', express.static(path.join(__dirname, '../assets')))
+    this.app.use('/assets', express.static(path.join(__dirname, '../../assets')))
     
   }
 
@@ -57,8 +48,6 @@ export default class Server {
 }
 
 const server = new Server(
-  new ProductRouter(new ProductView(new ProductModel())),
-  new UserRouter(new UserView()),
   new ErrorRouter(new ErrorView()),
   new ProjectRouter(new ProjectView(new ProjectModel()))
 )
